@@ -1,0 +1,43 @@
+<dtml-var standard_html_header>
+<script language="JavaScript">
+function AppPub(pri_id,username,session_id) { 
+  window.location="Check_Journal?journal=analyticalChemistry&pri_id="+pri_id+"&username="+username+"&session_id="+session_id;
+}
+
+</script>
+<br><br>
+<dtml-call "REQUEST.set('result_string', Fetch_Journal_Ctrl('analyticalChemistry'))">
+<dtml-call "REQUEST.set('output_str',result_string.split('@@'))">
+<table bgcolor="#0C2341" align="center" width="500" cellspacing="1" cellpadding="0">
+<tr height="35" align="center" valign="top" class="bluhead" bgcolor="#cc9999">
+<td colspan="4">&nbsp;Journal - Analytical Chemistry</td>
+</tr>
+<tr height="35" align="center" valign="top" class="bluhead" bgcolor="#cc9999">
+<td>&nbsp;</td>
+<td>Year</td><td>Issue</td><td>Status</td>
+</tr>
+<dtml-in output_str>
+<dtml-call "REQUEST.set('value',_['sequence-item'].split('$$'))">
+                      <dtml-call "REQUEST.set('pri_id',value[0])">
+                      <dtml-call "REQUEST.set('jr_month',value[1])">
+                      <dtml-call "REQUEST.set('jr_year',value[2])">
+                      <dtml-call "REQUEST.set('jr_issue',value[3])">
+                      <dtml-call "REQUEST.set('jr_volume',value[4])">
+                      <dtml-call "REQUEST.set('jr_status',value[5])">
+<dtml-if "_['sequence-number']%2==0">
+<tr class="mot_font" height="30" bgcolor="#EDEDF5" align="center" onmouseover="javascript:style.backgroundColor='#ffefd5'" onmouseout="javascript:style.backgroundColor='#EDEDF5'">
+<dtml-else>
+<tr class="mot_font" height="30" bgcolor="#f7f7f7" align="center" onmouseover="javascript:style.backgroundColor='#ffefd5'" onmouseout="javascript:style.backgroundColor='#f7f7f7'">
+</dtml-if>
+<td nowrap>&nbsp;<dtml-var sequence-number>&nbsp;</td>
+<td><dtml-var jr_year></td>
+<td><a href="http://pubs3.acs.org/acs/journals/toc.page?incoden=ancham&indecade=0&involume=<dtml-var jr_volume>&inissue=<dtml-var jr_issue>" class="stat"><dtml-var jr_month>; <dtml-var jr_issue>(<dtml-var jr_volume>)</a></td>
+<td><dtml-if "jr_status=='unchecked'">
+<input type="button" style="font-family:verdana, Arial, Tahoma, Sans-Serif; font-size:9pt; font-weight:bold; color:blue; background:#e6e6fa" value="Not yet done" onclick="javascript:AppPub('<dtml-var pri_id>','<dtml-var username>','<dtml-var session_id>');">
+<dtml-else>
+<input type="button" style="font-family:verdana, Arial, Tahoma, Sans-Serif; font-size:9pt; font-weight:bold; color:red; background:#e6e6fa" value="Completed">
+</dtml-if>
+</td>
+</tr>
+</dtml-in>
+<dtml-var standard_html_footer>

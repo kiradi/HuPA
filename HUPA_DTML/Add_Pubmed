@@ -1,0 +1,29 @@
+<dtml-var standard_html_header>
+<dtml-call "REQUEST.set('result_string', PubMed_Check_Add(pubmed, username,ms_inst))">
+<dtml-call "REQUEST.set('value',result_string.split('^^'))">
+                      <dtml-call "REQUEST.set('pmid_status',value[0])">
+                      <dtml-call "REQUEST.set('out_str',value[1])">
+<dtml-if "pmid_status=='Added'">
+<dtml-call expr="RESPONSE.redirect('Indexed_PMID?session_id=%s&username=%s' % (REQUEST['session_id'], REQUEST['username']))"> 
+<dtml-else>
+<dtml-call "REQUEST.set('value_log',out_str.split('@@'))">
+
+<br><br>
+<table bgcolor="#0C2341" align="center" width="55%" cellspacing="1" cellpadding="0">
+<tr height="35" align="center" valign="top" class="bluhead" bgcolor="#cc9999">
+<td>&nbsp;Status of PMID: &nbsp;<span class="red"><dtml-var pubmed></span></td>
+</tr>
+
+<dtml-in value_log>
+<dtml-call "REQUEST.set('entry_log',_['sequence-item'].split('##'))">
+                      <dtml-call "REQUEST.set('curr_status',entry_log[0])">
+                      <dtml-call "REQUEST.set('author_ad',entry_log[1])">
+                      <dtml-call "REQUEST.set('date_ad',entry_log[2])">
+<tr height="30" bgcolor="#EDEDF5" align="center" onmouseover="javascript:style.backgroundColor='#ffefd5'" onmouseout="javascript:style.backgroundColor='#EDEDF5'">
+<td class="mot_font"><span class="red"><dtml-var curr_status></span>&nbsp;by&nbsp;<dtml-var author_ad>&nbsp;on&nbsp;<dtml-var date_ad>&nbsp;IST</td></tr>
+</dtml-in>
+</table>
+</dtml-if>
+
+<dtml-var standard_html_footer>
+

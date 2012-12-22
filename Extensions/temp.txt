@@ -1,0 +1,43 @@
+Gress, Thomas M	Transcriptome analysis of microdissected pancreatic intraepithelial neoplastic lesions.
+Katagiri, Toyomasa	Genome-wide cDNA microarray analysis of gene expression profiles in pancreatic cancers using populations of tumor cells and normal ductal epithelial cells selected for purity by laser microdissection.
+Brown, Patrick O	Gene expression patterns in pancreatic tumors, cells and tissues.
+Goggins, Michael	Exploration of global gene expression patterns in pancreatic adenocarcinoma using cDNA microarrays.
+Hruban, Ralph H	Highly expressed genes in pancreatic ductal adenocarcinomas: a comprehensive characterization and comparison of the transcription profiles obtained from three major technologies.
+Hruban, Ralph H	Discovery of novel tumor markers of pancreatic cancer using global gene expression technology.
+Hanash, Samir	Molecular profiling of pancreatic adenocarcinoma and chronic pancreatitis identifies multiple genes differentially regulated in pancreatic cancer.
+Buchler, M W	Microarray-based identification of differentially expressed growth- and metastasis-associated genes in pancreatic cancer.
+Haun, Randy S	Differential expression of insulin-like growth factor binding protein-5 in pancreatic adenocarcinomas: identification using DNA microarray.
+Saeger, Hans Detlev	Gene expression profiling of microdissected pancreatic ductal carcinomas using high-density DNA microarrays.
+Goggins, Michael	Gene expression alterations in the non-neoplastic parenchyma adjacent to infiltrating pancreatic ductal adenocarcinoma.
+Hruban, Ralph H	Identification of novel highly expressed genes in pancreatic ductal adenocarcinomas through a bioinformatics analysis of expressed sequence tags.
+Lobler, Marian	Expression of connexin26 in islets of Langerhans is associated with impaired glucose tolerance in patients with pancreatic adenocarcinoma.
+Mao, Yu-Min	Discovery and analysis of pancreatic adenocarcinoma genes using cDNA microarrays.
+Tang, Yan	Analysis of gene expression profile of pancreatic carcinoma using cDNA microarray.
+Buscail, Louis	Identification of biomarkers of human pancreatic adenocarcinomas by expression profiling and validation with gene expression analysis in endoscopic ultrasound-guided fine needle aspiration samples.
+Lemoine, Nicholas R	Molecular alterations in pancreatic carcinoma: expression profiling shows that dysregulated expression of S100 genes is highly prevalent.
+Henshall, Susan M	Expression of HOXB2, a retinoic acid signaling target in pancreatic cancer and pancreatic intraepithelial neoplasia.
+Goggins, Michael	Differentiating pancreatic lesions by microarray and QPCR analysis of pancreatic juice RNAs.
+Simeone, Diane M	The molecular basis of pancreatic fibrosis: common stromal gene expression in chronic pancreatitis and pancreatic adenocarcinoma.
+Lemoine, N R	Gene expression profiles of pancreatic cancer and stromal desmoplasia.
+Pilarsky, Christian	Peroxisome proliferator-activated receptor gamma is highly expressed in pancreatic cancer and is associated with shorter overall survival times.
+Lemoine, Nicholas R	Expression profiling of microdissected pancreatic adenocarcinomas.
+Pilarsky, Christian	Gene expression profiles of microdissected pancreatic ductal adenocarcinoma.
+Postier, Russell G	Increased expression of alpha-1-antitrypsin, glutathione S-transferase pi and vascular endothelial growth factor in human pancreatic adenocarcinoma.
+Mano, Hiroyuki	Screening of genes specifically activated in the pancreatic juice ductal cells from the patients with pancreatic ductal carcinoma.
+Friess, Helmut	Enhanced expression of 14-3-3sigma in pancreatic cancer and its role in cell cycle regulation and apoptosis.
+Mark Evers, B	Inflammatory mechanisms contributing to pancreatic cancer development.
+Goggins, Michael	Characterization of gene expression in mucinous cystic neoplasms of the pancreas using oligonucleotide microarrays.
+Schirmacher, P	Tenascin C and annexin II expression in the process of pancreatic carcinogenesis.
+Friess, Helmut	Expression and functional significance of CDC25B in human pancreatic ductal adenocarcinoma.
+Goggins, Michael	Gene expression profiling identifies genes associated with invasive intraductal papillary mucinous neoplasms of the pancreas.
+Zervos, Emmanuel E	Identification of molecular markers specific for pancreatic neuroendocrine tumors by genetic profiling of core biopsies.
+Friess, Helmut	Overexpressed decorin in pancreatic cancer: potential tumor growth inhibition and attenuation of chemotherapeutic action.
+Hanash, Samir M	An autoantibody-mediated immune response to calreticulin isoforms in pancreatic cancer.
+Hruban, Ralph H	Differentially expressed genes in pancreatic ductal adenocarcinomas identified through serial analysis of gene expression.
+Nakamura, Yusuke	Down-regulation of RAB6KIFL/KIF20A, a kinesin involved with membrane trafficking of discs large homologue 5, can attenuate growth of pancreatic cancer cell.
+Friess, Helmut	Enhanced levels of Hsulf-1 interfere with heparin-binding growth factor signaling in pancreatic cancer.
+Friess, Helmut	FXYD3 is overexpressed in pancreatic ductal adenocarcinoma and influences pancreatic cancer cell growth.
+Frierson, Henry F Jr	Comprehensive analysis of HE4 expression in normal and malignant human tissues.
+Batra, Surinder K	MUC4-expressing pancreatic adenocarcinomas show elevated levels of both T1 and T2 cytokines: potential pathobiologic implications.
+Kleeff, Jorg	Tumor-suppressor function of SPARC-like protein 1/Hevin in pancreatic cancer.
+Logsdon, Craig D	CEACAM1, a novel serum biomarker for pancreatic cancer.

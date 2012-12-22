@@ -1,0 +1,233 @@
+<dtml-var standard_html_header>
+
+<form action="update_annotation_ms" method="post" enctype="multipart/form-data" name="form1"  onSubmit="return check()">
+<br><br>
+<dtml-call "REQUEST.set('pmid',pmid)">
+<dtml-call "REQUEST.set('result_string', Fetch_Anno_PMID(pmid))">
+<dtml-call "REQUEST.set('value',result_string.split('$$'))">
+                      <dtml-call "REQUEST.set('pmid',value[0])">
+                      <dtml-call "REQUEST.set('art_title',value[1])">
+                      <dtml-call "REQUEST.set('authors',value[2])">
+                      <dtml-call "REQUEST.set('journal',value[3])">
+                      <dtml-call "REQUEST.set('pub_date',value[4])">
+                      <dtml-call "REQUEST.set('status',value[5])">
+<dtml-call "REQUEST.set('result_string1', Fetch_Edit_Anno_PMID(pmid))">
+<dtml-call "REQUEST.set('value1',result_string1.split('$$'))">
+                      <dtml-call "REQUEST.set('annotator',value1[1])">
+                      <dtml-call "REQUEST.set('exp_type',value1[2])">
+                      <dtml-call "REQUEST.set('PI',value1[3])">
+                      <dtml-call "REQUEST.set('PI_email',value1[4])">
+                      <dtml-call "REQUEST.set('PI_int',value1[5])">
+                      <dtml-call "REQUEST.set('search_engine',value1[6])">
+                      <dtml-call "REQUEST.set('ion_mode',value1[7])">
+                      <dtml-call "REQUEST.set('vendor',value1[8])">
+                      <dtml-call "REQUEST.set('data_count',value1[9])">
+                      <dtml-call "REQUEST.set('ms_instrument',value1[10])">
+                      <dtml-call "REQUEST.set('label_tech',value1[11])">
+                      <dtml-call "REQUEST.set('frag_mode',value1[12])">
+                      <dtml-call "REQUEST.set('source_type',value1[13])">
+                      <dtml-call "REQUEST.set('red_alk',value1[14])">
+                      <dtml-call "REQUEST.set('sample_source',value1[15])">
+                      <dtml-call "REQUEST.set('in_gel',value1[16])">
+
+            <table class="mot_font" bgcolor="#0C2341" align="center" width="90%" cellspacing="1" cellpadding="0">
+<tr height="35" align="center" valign="top" class="bluhead" bgcolor="#cc9999">
+<td colspan="2">&nbsp;Mass Spectrometry based annotations for the PubMed:&nbsp;<span class= "red"><dtml-var pmid></span></td>
+</tr>
+<input type="hidden" name="pmid" value="<dtml-var pmid>">
+<input type="hidden" name="username" value="<dtml-var username>">
+<input type="hidden" name="session_id" value="<dtml-var session_id>">
+                        <tr> 
+                        <td height="30" bgcolor="#FBF6EC" nowrap>Article Title</td>
+                        <td height="30" bgcolor="#FBF6EC"> &nbsp;<dtml-var art_title>&nbsp;</td>
+                        </tr>
+                        <tr> 
+                        <td height="30" bgcolor="#FBF6EC" nowrap>Journal</td>
+                        <td height="30" bgcolor="#FBF6EC"> &nbsp;<dtml-var journal>&nbsp;</td>
+                        </tr>
+                        <tr> 
+                        <td height="30" bgcolor="#FBF6EC" nowrap>Publication Date</td>
+                        <td height="30" bgcolor="#FBF6EC"> &nbsp;<dtml-var pub_date>&nbsp;</td>
+                        </tr>
+                        <tr> 
+                        <td height="30" bgcolor="#FBF6EC" nowrap>Authors - Please select the PI</td>
+                        <td height="30" bgcolor="#FBF6EC" nowrap>
+                        <dtml-call "REQUEST.set('author_str',authors.split('##'))"> 
+                        <dtml-in author_str>
+                            <dtml-call "REQUEST.set('au_value',_['sequence-item'])"> 
+                            <dtml-if "au_value!=''">
+                                  <dtml-if "PI==au_value">
+                                  &nbsp;<input type="radio" name="PI" value="<dtml-var au_value>" checked>&nbsp;<dtml-var au_value>&nbsp;<br> 
+                                  <dtml-else>
+                                  &nbsp;<input type="radio" name="PI" value="<dtml-var au_value>">&nbsp;<dtml-var au_value>&nbsp;<br> 
+                                  </dtml-if>
+                            </dtml-if>
+                       </dtml-in>
+ </td>
+                        </tr>
+                       <tr> 
+                        <td height="30" bgcolor="#FBF6EC" nowrap>PI Institution</td>
+                        <td height="30" bgcolor="#FBF6EC"> &nbsp;<textarea name="PI_int" row="30" cols="80"><dtml-var PI_int></textarea>&nbsp;</td>
+                        </tr>
+                       <tr> 
+                        <td height="30" bgcolor="#FBF6EC" nowrap>PI E-mail Id</td>
+                        <td height="30" bgcolor="#FBF6EC"> &nbsp;<input type="text" name="PI_email" value="<dtml-var PI_email>">&nbsp;</td>
+                        </tr>
+                        <tr> 
+                        <td height="30" bgcolor="#FBF6EC" nowrap>Human Sample Source</td>
+                        <td height="30" bgcolor="#FBF6EC"> &nbsp;<input type="text" name="sample_source" value="<dtml-var sample_source>">&nbsp;</td>
+                        </tr>
+                       <tr> 
+                        <td height="30" bgcolor="#FBF6EC" nowrap>Human Source Type</td>
+                        <td height="30" bgcolor="#FBF6EC"> &nbsp;<select name="source_type">
+                             <option value="">Select</option>
+                             <dtml-in MS_source_type>
+                             <dtml-call "REQUEST.set('temp_source_type',_['sequence-item'])"> 
+                             <dtml-if "source_type==temp_source_type">
+                             <option selected><dtml-var temp_source_type></option>
+                             <dtml-else>
+                             <option><dtml-var temp_source_type></option>
+                             </dtml-if>
+                             </dtml-in>
+                            </select></td>
+                        </tr>
+
+                      <tr> 
+                        <td height="30" bgcolor="#FBF6EC" nowrap>Labeling technique</td>
+                        <td height="30" bgcolor="#FBF6EC"> &nbsp;<select name="label_tech">
+                             <option value="">Select</option>
+                             <dtml-in MS_label_tech>
+                             <dtml-call "REQUEST.set('temp_label_tech',_['sequence-item'])"> 
+                             <dtml-if "label_tech==temp_label_tech">
+                             <option selected><dtml-var temp_label_tech></option>
+                             <dtml-else>
+                             <option><dtml-var temp_label_tech></option>
+                             </dtml-if>
+                             </dtml-in>
+                           </select></td>
+                      </tr>
+
+                                      
+                      <tr> 
+                        <td height="30" bgcolor="#FBF6EC" nowrap>Is the sample from in gel?</td>
+                        <td height="30" bgcolor="#FBF6EC"> &nbsp;<select name="in_gel">
+                            <option value="">Select</option>
+                            <dtml-in MS_in_gel>
+                             <dtml-call "REQUEST.set('temp_in_gel',_['sequence-item'])"> 
+                             <dtml-if "in_gel==temp_in_gel">
+                             <option selected><dtml-var temp_in_gel></option>
+                             <dtml-else>
+                             <option><dtml-var temp_in_gel></option>
+                             </dtml-if>
+                             </dtml-in>
+                      </select></td>
+                      </tr>
+
+                      <tr> 
+                        <td height="30" bgcolor="#FBF6EC" nowrap>Reduction and alkylation</td>
+                        <td height="30" bgcolor="#FBF6EC"> &nbsp;<select name="red_alk">
+                            <option value="">Select</option>
+                            <dtml-in MS_in_gel>
+                             <dtml-call "REQUEST.set('temp_red_alk',_['sequence-item'])"> 
+                             <dtml-if "red_alk==temp_red_alk">
+                             <option selected><dtml-var temp_red_alk></option>
+                             <dtml-else>
+                             <option><dtml-var temp_red_alk></option>
+                             </dtml-if>
+                             </dtml-in>
+                      </select></td>
+                      </tr>
+                 
+
+                      
+                       <tr> 
+                        <td height="30" bgcolor="#FBF6EC" nowrap>Mass spectrometer used</td>
+                        <td height="30" bgcolor="#FBF6EC"> &nbsp;<select name="ms_instrument">
+                            <option value="">Select the mass spectrometer used</option>
+                            <dtml-in MS_ms_instrument>
+                             <dtml-call "REQUEST.set('temp_ms_instrument',_['sequence-item'])"> 
+                             <dtml-if "ms_instrument==temp_ms_instrument">
+                             <option selected><dtml-var temp_ms_instrument></option>
+                             <dtml-else>
+                             <option><dtml-var temp_ms_instrument></option>
+                             </dtml-if>
+                             </dtml-in>
+                      </select></td>
+                      </tr>
+
+
+<tr> 
+<td height="30" bgcolor="#FBF6EC" nowrap>Instrument vendor</td>
+<td height="30" bgcolor="#FBF6EC"> &nbsp;<select name="vendor">
+<option value="">Select instrument vendor</option> 
+<dtml-in MS_vendor>
+                             <dtml-call "REQUEST.set('temp_vendor',_['sequence-item'])"> 
+                             <dtml-if "vendor==temp_vendor">
+                             <option selected><dtml-var temp_vendor></option>
+                             <dtml-else>
+                             <option><dtml-var temp_vendor></option>
+                             </dtml-if>
+                             </dtml-in>
+</select></td>
+                      </tr>
+
+
+ <tr> 
+<td height="30" bgcolor="#FBF6EC" nowrap>Ionization method</td>
+<td height="30" bgcolor="#FBF6EC"> &nbsp;<select name="ion_mode">
+<option value="">Select an ionization type</option>    
+<dtml-in MS_ion_mode>
+                             <dtml-call "REQUEST.set('temp_ion_mode',_['sequence-item'])"> 
+                             <dtml-if "ion_mode==temp_ion_mode">
+                             <option selected><dtml-var temp_ion_mode></option>
+                             <dtml-else>
+                             <option><dtml-var temp_ion_mode></option>
+                             </dtml-if>
+                             </dtml-in>             
+</select></td>
+                      </tr>
+<tr> 
+<td height="30" bgcolor="#FBF6EC" nowrap>Activation method</td>
+<td height="30" bgcolor="#FBF6EC"> &nbsp;<select name="frag_mode">
+<option value="">Select activation method</option> 
+<dtml-in MS_frag_mode>
+                             <dtml-call "REQUEST.set('temp_frag_mode',_['sequence-item'])"> 
+                             <dtml-if "frag_mode==temp_frag_mode">
+                             <option selected><dtml-var temp_frag_mode></option>
+                             <dtml-else>
+                             <option><dtml-var temp_frag_mode></option>
+                             </dtml-if>
+                             </dtml-in>  
+</select></td>
+                      </tr>
+
+                     <tr> 
+                        <td height="30" bgcolor="#FBF6EC" nowrap>Search algorithm used</td>
+                        <td height="30" bgcolor="#FBF6EC"> &nbsp;<select name="search_engine">
+                             <option value="">Select</option>
+                              <dtml-in MS_search_engine>
+                             <dtml-call "REQUEST.set('temp_search_engine',_['sequence-item'])"> 
+                             <dtml-if "search_engine==temp_search_engine">
+                             <option selected><dtml-var temp_search_engine></option>
+                             <dtml-else>
+                             <option><dtml-var temp_search_engine></option>
+                             </dtml-if>
+                             </dtml-in>                             
+                           </select></td>
+                      </tr>
+
+                       <tr> 
+                        <td height="30" bgcolor="#FBF6EC" nowrap>Data Count</td>
+                        <td height="30" bgcolor="#FBF6EC"> &nbsp;<input type="text" name="data_count" value="<dtml-var data_count>">&nbsp;</td>
+                        </tr>
+                       
+                
+                   
+                    </table>
+<br><br>
+<center><input type="submit" value="Edit"></center>
+                   
+</form>
+
+
+<dtml-var standard_html_footer>

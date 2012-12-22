@@ -1,0 +1,92 @@
+<dtml-var standard_html_header>
+
+<script language="JavaScript" type="text/JavaScript">
+function stripCharacter(words) {
+	  var spaces = words.length;
+	  for(var x = 1; x<spaces; ++x){
+	   words = words.replace(" ", "");   
+	 }
+	 return words;
+    }
+
+function check(){
+if (document.layers||document.getElementById||document.all)
+{
+                                   
+if(document.form1.password.value==document.form1.confirmPassword.value) {
+                                       if(document.form1.fName.value==""){
+                                       alert("Please enter your first name")
+                                       return false}
+                                       else if(document.form1.lName.value==""){
+                                       alert("Please enter your last name")
+                                       return false}
+                                       else if(document.form1.username.value==""){
+                                       alert("Please enter your desired username")
+                                       return false}
+                                       else if(document.form1.username.value!=""){
+                                       var strline =document.form1.username.value;
+                                       if(strline.length > 15) {
+                                       alert("Username should be less than 16 characters")
+                                       return false}
+                                       }
+                                       else if(document.form1.password.value==""){
+                                       alert("Please enter your password")
+                                       return false}
+                                       else if(document.form1.confirmPassword.value!=""){
+                                       alert("Please confirm your password")
+                                       return false}
+                                       else {  
+                                       return true}
+                                       }  
+else {
+alert("Passwords doest not match ! ")
+return false}
+                     
+}
+else { alert("Error") }
+}
+</script>
+<br><br>
+<form name="form1" method="post" action="member" onSubmit="return check()">
+<table width="50%" align="center" cellpadding="0" cellspacing="0">
+<tr><td bgcolor="#0C2341" width="30">&nbsp</td><td>
+        <table width="75%" border="0" align="left" cellpadding="0" cellspacing="0">
+         <tr> 
+      <td width="29" height="25" bgcolor="#cc9999">&nbsp;</td>
+      <td width="819" height="25" bgcolor="#cc9999" class="stat">Register</td>
+        </tr>
+          
+          <tr> 
+            <td height="16" colspan="2"><table width="99%" border="0" align="center" cellpadding="0" cellspacing="1" bgcolor="#EDEDF5">
+                <tr> 
+                  <td width="34%" height="29" bgcolor="#EDEDF5">First Name &nbsp;&nbsp;<span class="redbig">*</span></td>
+                  <td width="66%" height="29" bgcolor="#EDEDF5"> <input name="fName" type="text"></td>
+                </tr>
+               <tr> 
+                  <td height="30" bgcolor="#f7f7f7"> Last Name&nbsp;&nbsp;<span class="redbig">*</span></td>
+                  <td height="30" bgcolor="#f7f7f7"> <input name="lName" type="text" id="lName"></td>
+                </tr>
+               
+          <tr bgcolor="#EDEDF5"> 
+            <td height="30" bgcolor="#EDEDF5">Enter Username&nbsp;&nbsp;<span class="redbig">*</span><br></td>
+            <td height="30" bgcolor="#EDEDF5"><input name="username" type="text" id="username"></td>
+          </tr>
+          <tr bgcolor="#f7f7f7"> 
+            <td height="30" bgcolor="#f7f7f7">Enter Password&nbsp;&nbsp;<span class="redbig">*</span></td>
+            <td height="30" bgcolor="#f7f7f7"><input name="password" type="password" id="password"></td>
+          </tr>
+          <tr bgcolor="#EDEDF5"> 
+            <td height="30" bgcolor="#EDEDF5">Confirm Password&nbsp;&nbsp;<span class="redbig">*</span><br></td>
+            <td height="30" bgcolor="#EDEDF5"><input name="confirmPassword" type="password" id="confirmPassword"></td>
+          </tr>
+          <tr align="center"> 
+            <td height="30" colspan="2" bgcolor="#f7f7f7"> <input type="submit" name="Submit" value="Submit"></td>
+          </tr>
+        </table></td>
+          </tr>
+          <tr> 
+            <td colspan="2" height="32" bgcolor="#cc9999">&nbsp;</td>
+          </tr>
+        </table></td><tr></table>
+        </form>
+<dtml-var standard_html_footer>

@@ -1,0 +1,33 @@
+<dtml-var standard_html_header>
+<dtml-sendmail mailhost=MailHost>
+<dtml-if "fromid=='prashantha'">
+ From:Prashantha<prashantha@ibioinformatics.org>
+<dtml-else>
+ From:Akhilesh Pandey<pandey@jhmi.edu>
+</dtml-if>
+<dtml-if attach>
+To:<dtml-var piEmailId>
+Reply-To:Prashantha<prashantha@ibioinformatics.org>, suresh<suresh@ibioinformatics.org>, HuPA<hupa@ibioinformatics.org>
+CC: Beema<beema@ibioinformatics.org>, suresh<suresh@ibioinformatics.org>, Nandini<nandini@ibioinformatics.org>, HuPA<hupa@ibioinformatics.org>
+BCC:Akhilesh Pandey<pandey@jhmi.edu>
+Subject:<dtml-var subject>
+<dtml-mime type="text/plain">
+<dtml-var body>
+<dtml-boundary type="application/pdf" disposition="attachment" filename="nbt0208-164.pdf" encode="base64" >
+<dtml-var expr="attach.read()">
+<dtml-var attach>
+</dtml-mime>
+<dtml-else>
+To:<dtml-var piEmailId>
+Reply-To:Prashantha<prashantha@ibioinformatics.org>, suresh <suresh@ibioinformatics.org>, HuPA <hupa@ibioinformatics.org>
+CC:Prashantha<prashantha@ibioinformatics.org>,suresh <suresh@ibioinformatics.org>, HuPA <hupa@ibioinformatics.org>, Nandini<nandini@ibioinformatics.org>
+BCC:Akhilesh Pandey<pandey@jhmi.edu>
+Subject:<dtml-var subject>
+<dtml-var body>
+</dtml-if>
+</dtml-sendmail>
+
+<dtml-call "REQUEST.set('mup_res',Insert_MailManager(piName,piEmailId,pmids))">
+<dtml-call "REQUEST.set('contacted_res', Contacted_PMID(pmids,username))">
+<h2>Maill sent successfully!!!</h2>
+<dtml-var standard_html_footer>

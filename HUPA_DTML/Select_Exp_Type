@@ -1,0 +1,31 @@
+<dtml-var standard_html_header>
+<script language="JavaScript">
+function AnnPub() { 
+  alert("hi");
+  window.location="Select_Exp_Type?pmid=what";
+}
+function DisPub(pmid) { 
+  window.location="Select_Exp_Type?pmid="+pmid;
+}
+</script>
+
+<form name="form1">
+<br><br>
+<table bgcolor="#0C2341" align="center" width="55%" cellspacing="1" cellpadding="0">
+<tr height="35" align="center" valign="top" class="bluhead" bgcolor="#cc9999">
+<td>&nbsp;Select the Experiment type for the PubMed:&nbsp;<span class= "red"><dtml-var pmid></span></td>
+</tr>
+<tr height="50" bgcolor="#EDEDF5" align="center" onmouseover="javascript:style.backgroundColor='#ffefd5'" onmouseout="javascript:style.backgroundColor='#EDEDF5'"><td>
+                          <select onChange="document.location=options[selectedIndex].value;">
+                            <option value="">Select</option>
+                            <option value="MS?pmid=<dtml-var pmid>&session_id=<dtml-var session_id>&username=<dtml-var username>">Mass Spectrometry</option>
+                            <option value="COIP?pmid=<dtml-var pmid>&session_id=<dtml-var session_id>&username=<dtml-var username>">Co-immunoprecipitation</option>
+                          </select>
+</td></tr></table>
+<br><br>
+<table align="center" height="300" width="55%" cellspacing="0" cellpadding="0">
+<tr valign="top" height="30" align="center"><td>
+<input type="button" class="btn" value="Back" onclick="javascript: window.back();">
+</td></tr>
+</form>
+<dtml-var standard_html_footer>

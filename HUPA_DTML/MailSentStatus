@@ -1,0 +1,16 @@
+<dtml-var standard_html_header>
+<dtml-call "REQUEST.set('ms_result',Fetch_MailManager())">
+<dtml-call "REQUEST.set('ms_res',ms_result.split('$$'))">
+<table border='1'>
+<dtml-in ms_res>
+<tr>
+ <td>
+     <dtml-call "REQUEST.set('ms_re',_['sequence-item'].split('#'))">
+     <dtml-in ms_re>
+        <td><dtml-var sequence-item></td>
+     </dtml-in>
+ </td>
+</tr>
+</dtml-in>
+</table>
+<dtml-var standard_html_footer>

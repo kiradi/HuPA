@@ -1,0 +1,6 @@
+<dtml-var standard_html_header>
+
+<dtml-call "REQUEST.set('result_string', Add_PMID_Ann(search_engine, PI_int, ion_mode, PI, vendor, data_count, ms_instrument, label_tech, frag_mode, username, source_type, PI_email, red_alk, pmid, sample_source, in_gel))">
+<dtml-call expr="RESPONSE.redirect('home.html?session_id=%s&username=%s' % (REQUEST['session_id'], REQUEST['username']))"> 
+
+<dtml-var standard_html_footer>

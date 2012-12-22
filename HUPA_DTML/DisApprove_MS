@@ -1,0 +1,4 @@
+<dtml-call "REQUEST.set('result_string', Dis_PMID(pmid, username))">
+<dtml-call expr="RESPONSE.redirect('Annotated_PMID?app=1&session_id=%s&username=%s' % (REQUEST['session_id'], REQUEST['username']))"> 
+
+

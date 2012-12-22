@@ -1,0 +1,56 @@
+#!/usr/bin/perl
+
+import MySQLdb
+import random
+import time                                                                                                                 
+
+
+def hupa_log(username, password, remote):
+
+	password=password.strip()
+	username=username.strip()
+	if password=='':
+		return "notvalid"
+	if username=='':
+		return "notvalid"
+
+	conn = MySQLdb.connect(host="localhost", user="root", passwd="changeme",db="HuPA")
+        curs = conn.cursor()
+	username_check_query="select * from User_Details where username = '"+str(username)+"' and password = '"+str(password)+"'"
+	curs.execute(username_check_query)
+	data = curs.fetchall()
+	if data != ():
+		alph=['q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', 'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'z', 'x', 'c', 'v', 'b', 'n', 'm']
+		num1=random.randint(10000, 100000)
+		num2=random.randint(10000, 100000)
+		session=str(num1)
+		for i in range(6):
+			ALP=random.choice(alph)
+			session=session+str(ALP)
+		session=session+ str(num2)
+
+
+		#Getting the local time.
+		present_time=time.localtime()
+		year=present_time[0]
+		date=present_time[2]
+		month=present_time[1]
+		hour=present_time[3]
+		minute=present_time[4]
+		seconds=present_time[5]
+		final_date=str(date)+"-"+str(month)+"-"+str(year)
+		final_time=str(hour)+":"+str(minute)+":"+str(seconds)
+
+		session_query="insert into session values(0, '" + str(session)+ "', '" + str(username) + "', '" + str(final_time) + "', '" + str(final_date) + "');"
+                curs.execute(session_query)
+                conn.commit()
+		out_str="valid##"+str(session)
+
+	else:
+		out_str="notvalid##1"
+
+	curs.close()
+        conn.close()
+
+	return out_str
+

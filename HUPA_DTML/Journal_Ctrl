@@ -1,0 +1,95 @@
+<dtml-var standard_html_header>
+<br><br>
+<table valign="middle" bgcolor="#0C2341" align="center" width="400" height="200" cellspacing="1" cellpadding="0">
+<tr height="20" align="center" valign="middle" bgcolor="#cc9999"><td colspan="2" class="red">Journal Check List</td></tr>
+<tr bgcolor="#f2f2f2" height="20" align="center" valign="middle">
+<td class="red" valign="middle">
+1</td><td valign="middle">&nbsp;&nbsp;<a href="mcp?session_id=<dtml-var session_id>&username=<dtml-var username>" class="stat">MCP</a></td></tr>
+<tr bgcolor="#f2f2f2" height="20" align="center" valign="middle">
+<td class="red" valign="middle">
+2</td><td valign="middle">&nbsp;&nbsp;<a href="jpr?session_id=<dtml-var session_id>&username=<dtml-var username>" class="stat">JPR</a></td></tr>
+<tr bgcolor="#f2f2f2" height="20" align="center" valign="middle">
+<td class="red" valign="middle">
+3</td><td valign="middle">&nbsp;&nbsp;<a href="proteomics?session_id=<dtml-var session_id>&username=<dtml-var username>" class="stat">Proteomics</a></td></tr>
+<tr bgcolor="#f2f2f2" height="20" align="center" valign="middle">
+<td class="red" valign="middle">
+4</td><td valign="middle">&nbsp;&nbsp;<a href="cell?session_id=<dtml-var session_id>&username=<dtml-var username>" class="stat">Cell</a></td></tr>
+<tr bgcolor="#f2f2f2" height="20" align="center" valign="middle">
+<td class="red" valign="middle">
+5</td><td valign="middle">&nbsp;&nbsp;<a href="science?session_id=<dtml-var session_id>&username=<dtml-var username>" class="stat">Science</a></td></tr>
+
+<tr bgcolor="#f2f2f2" height="20" align="center" valign="middle">
+<td class="red" valign="middle">
+6</td><td valign="middle">&nbsp;&nbsp;<a href="genomeBiology?session_id=<dtml-var session_id>&username=<dtml-var username>" class="stat">Genome Biology</a></td></tr>
+
+<tr bgcolor="#f2f2f2" height="20" align="center" valign="middle">
+<td class="red" valign="middle">
+7</td><td valign="middle">&nbsp;&nbsp;<a href="analyticalChemistry?session_id=<dtml-var session_id>&username=<dtml-var username>" class="stat">Analytical Chemistry</a></td></tr>
+
+<tr bgcolor="#f2f2f2" height="20" align="center" valign="middle">
+<td class="red" valign="middle">
+8</td><td valign="middle">&nbsp;&nbsp;<a href="nature?session_id=<dtml-var session_id>&username=<dtml-var username>" class="stat">Nature</a></td></tr>
+
+
+<tr bgcolor="#f2f2f2" height="20" align="center" valign="middle">
+<td class="red" valign="middle">
+9</td><td valign="middle">&nbsp;&nbsp;<a href="natureMethods?session_id=<dtml-var session_id>&username=<dtml-var username>" class="stat">Nature Methods</a></td></tr>
+
+<tr bgcolor="#f2f2f2" height="20" align="center" valign="middle">
+<td class="red" valign="middle">
+10</td><td valign="middle">&nbsp;&nbsp;<a href="natureBiotech?session_id=<dtml-var session_id>&username=<dtml-var username>" class="stat">Nature Biotech</a></td></tr>
+
+<tr bgcolor="#f2f2f2" height="20" align="center" valign="middle">
+<td class="red" valign="middle">
+11</td><td valign="middle">&nbsp;&nbsp;<a href="natureMedicine?session_id=<dtml-var session_id>&username=<dtml-var username>" class="stat">Nature Medicine</a></td></tr>
+
+<tr bgcolor="#f2f2f2" height="20" align="center" valign="middle">
+<td class="red" valign="middle">
+12</td><td valign="middle">&nbsp;&nbsp;<a href="natureImmunology?session_id=<dtml-var session_id>&username=<dtml-var username>" class="stat">Nature Immunology</a></td></tr>
+
+<tr bgcolor="#f2f2f2" height="20" align="center" valign="middle">
+<td class="red" valign="middle">
+13</td><td valign="middle">&nbsp;&nbsp;<a href="natureCellBiology?session_id=<dtml-var session_id>&username=<dtml-var username>" class="stat">Nature Cell Biology</a></td></tr>
+
+<tr bgcolor="#f2f2f2" height="20" align="center" valign="middle">
+<td class="red" valign="middle">
+14</td><td valign="middle">&nbsp;&nbsp;<a href="natureGenetics?session_id=<dtml-var session_id>&username=<dtml-var username>" class="stat">Nature Genetics</a></td></tr>
+
+<tr bgcolor="#f2f2f2" height="20" align="center" valign="middle">
+<td class="red" valign="middle">
+15</td><td valign="middle">&nbsp;&nbsp;<a href="natureReviewsCancer?session_id=<dtml-var session_id>&username=<dtml-var username>" class="stat">Nature Reviews Cancer</a></td></tr>
+
+<tr bgcolor="#f2f2f2" height="20" align="center" valign="middle">
+<td class="red" valign="middle">
+16</td><td valign="middle">&nbsp;&nbsp;<a href="natureReviewsGenetics?session_id=<dtml-var session_id>&username=<dtml-var username>" class="stat">Nature Reviews Genetics</a></td></tr>
+
+<tr bgcolor="#f2f2f2" height="20" align="center" valign="middle">
+<td class="red" valign="middle">
+17</td><td valign="middle">&nbsp;&nbsp;<a href="natureReviewsMolCellBiology?session_id=<dtml-var session_id>&username=<dtml-var username>" class="stat">Nature Reviews Molecular Cell Biology</a></td></tr>
+
+<tr bgcolor="#f2f2f2" height="20" align="center" valign="middle">
+<td class="red" valign="middle">
+18</td><td valign="middle">&nbsp;&nbsp;<a href="pnas?session_id=<dtml-var session_id>&username=<dtml-var username>" class="stat">PNAS</a></td></tr>
+
+<tr bgcolor="#f2f2f2" height="20" align="center" valign="middle">
+<td class="red" valign="middle">
+19</td><td valign="middle">&nbsp;&nbsp;<a href="electrophoresis?session_id=<dtml-var session_id>&username=<dtml-var username>" class="stat">Electrophoresis</a></td></tr>
+
+<tr bgcolor="#f2f2f2" height="20" align="center" valign="middle">
+<td class="red" valign="middle">
+20</td><td valign="middle">&nbsp;&nbsp;<a href="journalMassSpec?session_id=<dtml-var session_id>&username=<dtml-var username>" class="stat">Journal of Mass Spectrometry</a></td></tr>
+
+<tr bgcolor="#f2f2f2" height="20" align="center" valign="middle">
+<td class="red" valign="middle">
+21</td><td valign="middle">&nbsp;&nbsp;<a href="proClinicalApp?session_id=<dtml-var session_id>&username=<dtml-var username>" class="stat">Proteomics Clinical Applications</a></td></tr>
+
+<tr bgcolor="#f2f2f2" height="20" align="center" valign="middle">
+<td class="red" valign="middle">
+22</td><td valign="middle">&nbsp;&nbsp;<a href="clinicalProteomics?session_id=<dtml-var session_id>&username=<dtml-var username>" class="stat">Clinical Proteomics</a></td></tr>
+
+<tr bgcolor="#f2f2f2" height="20" align="center" valign="middle">
+<td class="red" valign="middle">
+23</td><td valign="middle">&nbsp;&nbsp;<a href="genomeResearch?session_id=<dtml-var session_id>&username=<dtml-var username>" class="stat">Genome Research</a></td></tr>
+
+</table>
+<dtml-var standard_html_footer>

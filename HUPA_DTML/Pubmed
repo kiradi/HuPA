@@ -1,0 +1,35 @@
+<dtml-var standard_html_header>
+
+<form name="pubmed" action="Add_PubMed" method="post"> 
+<br><br><br><br>
+<table valign="middle" bgcolor="#0C2341" align="center" width="400" height="200" cellspacing="1" cellpadding="0">
+<tr height="20" align="center" valign="middle" bgcolor="#cc9999"><td colspan="2">&nbsp;</td></tr>
+<tr bgcolor="#f2f2f2" height="50" align="center" valign="middle">
+<td class="red" valign="middle">
+Enter the PubMed ID: &nbsp;&nbsp;</td><td valign="middle">&nbsp;&nbsp;<input type="text" name="pubmed" value="">
+</td></tr>
+<tr bgcolor="#f2f2f2" height="50" align="center" valign="middle">
+<td class="red" valign="middle">Select Instrument:&nbsp;&nbsp;</td>
+<td>
+<select name="ms_inst">
+<option value="">----- Select -----</option>
+<option value="FTICR">FTICR </option>
+<option value="LCQ iontrap">LCQ iontrap</option>
+<option value="LTQ">LTQ</option>
+<option value="MALDI TOF/TOF">MALDI TOF/TOF</option>
+<option value="Orbitrap">Orbitrap</option>
+<option value="QTOF">QTOF</option>
+</select>
+</td>
+</tr>
+<input type="hidden" name="username" value="<dtml-var username>">
+<input type="hidden" name="session_id" value="<dtml-var session_id>">
+
+<tr>
+
+<td width="50" align="center" colspan="2"><br>
+<input type="submit" name="Submit" style="font-family:verdana, Arial, Tahoma, Sans-Serif; font-size:10pt; font-weight:bold; color:#0C2341; background:#e0e0e0" value="Add PubMed"></td>
+</tr>
+</table>
+</form>
+<dtml-var standard_html_footer>

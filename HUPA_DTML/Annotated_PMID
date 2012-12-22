@@ -1,0 +1,110 @@
+<dtml-var standard_html_header>
+
+<script language="JavaScript">
+function AnnPub(pmid,username,session_id) { 
+  window.location="Edit_MS?pmid="+pmid+"&username="+username+"&session_id="+session_id;
+}
+function DelPub(pmid,username,session_id) { 
+  window.location="delete_pmid?status=Annotated_del&pmid="+pmid+"&username="+username+"&session_id="+session_id;
+}
+function AppPub(pmid,username,session_id) { 
+  window.location="Approve_MS?pmid="+pmid+"&username="+username+"&session_id="+session_id;
+}
+function DispPub(pmid,username,session_id) { 
+  window.location="delete_pmid?status=Annotated&pmid="+pmid+"&username="+username+"&session_id="+session_id;
+}
+</script>
+
+<dtml-comment>
+##########################################################################################
+#
+#        Data fetch and display  -  start
+#
+##########################################################################################
+</dtml-comment>
+
+<dtml-call "REQUEST.set('result_string', Fetch_Annotated_PMID())">
+<dtml-call "REQUEST.set('output_str',result_string.split('@@'))">
+
+<br><br>
+<table bgcolor="#0C2341" align="center" width="100%" cellspacing="1" cellpadding="0">
+<tr height="35" align="center" valign="top" class="bluhead" bgcolor="#cc9999">
+<td>&nbsp;</td>
+<td>PubMed ID</td><td>Title</td><td>Experiment Type</td><td>Journal & <br>Publication Date</td><td>Authors</td>
+<td>PI</td><td>PI E-mail</td><td>PI Institution</td>
+<td>Mass spectrometer</td><td>Sample</td>
+<td>Ion mode</td><td>Fragmentation method</td>
+<td>In gel</td><td>Data size</td>
+<td>Annotated By</td><td>Contribution status</td>
+
+<dtml-if "REQUEST.has_key('app')">
+<td>Approve</td><td>Disapprove</td>
+<dtml-else>
+<td>Edit</td><td>Discard</td>
+</dtml-if>
+</tr>
+<dtml-in output_str>
+<dtml-call "REQUEST.set('value',_['sequence-item'].split('$$'))">
+                      <dtml-call "REQUEST.set('pmid',value[0])">
+                      <dtml-call "REQUEST.set('art_title',value[1])">
+                      <dtml-call "REQUEST.set('authors',value[2])">
+                      <dtml-call "REQUEST.set('journal',value[3])">
+                      <dtml-call "REQUEST.set('pub_date',value[4])">
+                      <dtml-call "REQUEST.set('status',value[5])">
+                      <dtml-call "REQUEST.set('annotator',value[6])">
+                      <dtml-call "REQUEST.set('date_ad',value[7])">
+                      <dtml-call "REQUEST.set('exp_type',value[8])">
+                      <dtml-call "REQUEST.set('PI',value[9])">
+                      <dtml-call "REQUEST.set('PI_email',value[10])">
+                      <dtml-call "REQUEST.set('PI_int',value[11])">
+                      <dtml-call "REQUEST.set('ms_int',value[12])">
+                      <dtml-call "REQUEST.set('samp',value[13])">
+                      <dtml-call "REQUEST.set('cont_status',value[14])">
+                      <dtml-call "REQUEST.set('ion_mod',value[15])">
+                      <dtml-call "REQUEST.set('frag_mod',value[16])">
+                      <dtml-call "REQUEST.set('data_count',value[17])">
+                      <dtml-call "REQUEST.set('in_gel',value[18])">
+
+<dtml-if "_['sequence-number']%2==0">
+<tr class="mot_font" height="30" bgcolor="#EDEDF5" align="center" onmouseover="javascript:style.backgroundColor='#ffefd5'" onmouseout="javascript:style.backgroundColor='#EDEDF5'">
+<dtml-else>
+<tr class="mot_font" height="30" bgcolor="#f7f7f7" align="center" onmouseover="javascript:style.backgroundColor='#ffefd5'" onmouseout="javascript:style.backgroundColor='#f7f7f7'">
+</dtml-if>
+<td nowrap>&nbsp;<dtml-var sequence-number>&nbsp;</td>
+<td nowrap><a href="http://www.ncbi.nlm.nih.gov/pubmed/<dtml-var pmid>?dopt=Abstract"><dtml-var pmid></a></td>
+<td><dtml-var art_title></td>
+<td><dtml-var exp_type></td>
+<td><dtml-var journal>, <dtml-var pub_date></td>
+<td nowrap><dtml-var expr="authors.replace('##', '<br>')"></td>
+<td><dtml-var PI></td>
+<td><dtml-var PI_email></td>
+<td><dtml-var PI_int></td>
+<td><dtml-var ms_int></td>
+<td><dtml-var samp></td>
+<td><dtml-var ion_mod></td>
+<td><dtml-var frag_mod></td>
+<td><dtml-var in_gel></td>
+<td><dtml-var data_count></td>
+<td><dtml-var annotator>, <dtml-var date_ad></td>
+<td><dtml-var cont_status></td>
+<dtml-if "REQUEST.has_key('app')">
+<td><input type="button" style="font-family:verdana, Arial, Tahoma, Sans-Serif; font-size:9pt; font-weight:bold; color:blue; background:#e6e6fa" value="Approve" onclick="javascript:AppPub('<dtml-var pmid>','<dtml-var username>','<dtml-var session_id>');"></td>
+<td><input type="button" style="font-family:verdana, Arial, Tahoma, Sans-Serif; font-size:9pt; font-weight:bold; color:blue; background:#e6e6fa" value="Disapprove" onclick="javascript:DispPub('<dtml-var pmid>','<dtml-var username>','<dtml-var session_id>');"></td>
+<dtml-else>
+<td><input type="button" style="font-family:verdana, Arial, Tahoma, Sans-Serif; font-size:9pt; font-weight:bold; color:blue; background:#e6e6fa" value="Edit" onclick="javascript:AnnPub('<dtml-var pmid>','<dtml-var username>','<dtml-var session_id>');"></td>
+<td><input type="button" style="font-family:verdana, Arial, Tahoma, Sans-Serif; font-size:9pt; font-weight:bold; color:blue; background:#e6e6fa" value="Discard" onclick="javascript:DelPub('<dtml-var pmid>','<dtml-var username>','<dtml-var session_id>');"></td>
+
+</dtml-if>
+</tr>
+</dtml-in>
+<dtml-comment>
+
+##########################################################################################
+#
+#        Data fetch and display  -  end
+#
+##########################################################################################
+</dtml-comment>
+
+<dtml-var standard_html_footer>
+

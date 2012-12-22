@@ -1,0 +1,3 @@
+<dtml-var standard_html_header>
+<dtml-call expr="RESPONSE.redirect('http://mailman.ibioinformatics.org/pipermail/hupa/?session_id=%s&username=%s' % (REQUEST['session_id'], REQUEST['username']))"> 
+<dtml-var standard_html_footer>

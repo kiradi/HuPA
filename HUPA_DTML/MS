@@ -1,0 +1,340 @@
+<dtml-var standard_html_header>
+
+<form action="annotation_ms" method="post" enctype="multipart/form-data" name="form1"  onSubmit="return check()">
+
+<dtml-comment>
+<form action="test" method="post" enctype="multipart/form-data" name="form1"  onSubmit="return check()">
+</dtml-comment>
+<br><br>
+<dtml-call "REQUEST.set('pmid',pmid)">
+<dtml-call "REQUEST.set('result_string', Fetch_Anno_PMID(pmid))">
+<dtml-call "REQUEST.set('value',result_string.split('$$'))">
+                      <dtml-call "REQUEST.set('pmid',value[0])">
+                      <dtml-call "REQUEST.set('art_title',value[1])">
+                      <dtml-call "REQUEST.set('authors',value[2])">
+                      <dtml-call "REQUEST.set('journal',value[3])">
+                      <dtml-call "REQUEST.set('pub_date',value[4])">
+                      <dtml-call "REQUEST.set('status',value[5])">
+                      <dtml-if "value[6]!='None##None##None'">
+                        <dtml-call "REQUEST.set('piInfo',value[6])">
+                      <dtml-else>
+                        <dtml-call "REQUEST.set('piInfo','Could not find any above authors as PI in database## ## ')">
+                     </dtml-if>
+            <table class="mot_font" bgcolor="#0C2341" align="center" width="90%" cellspacing="1" cellpadding="0">
+<tr height="35" align="center" valign="top" class="bluhead" bgcolor="#cc9999">
+<td colspan="2">&nbsp;Mass Spectrometry based annotations for the PubMed:&nbsp;<span class= "red"><dtml-var pmid></span></td>
+</tr>
+<input type="hidden" name="pmid" value="<dtml-var pmid>">
+<input type="hidden" name="username" value="<dtml-var username>">
+<input type="hidden" name="session_id" value="<dtml-var session_id>">
+                        <tr> 
+                        <td height="30" bgcolor="#FBF6EC" nowrap>Article Title</td>
+                        <td height="30" bgcolor="#FBF6EC"> &nbsp;<dtml-var art_title>&nbsp;</td>
+                        </tr>
+                        <tr> 
+                        <td height="30" bgcolor="#FBF6EC" nowrap>Journal</td>
+                        <td height="30" bgcolor="#FBF6EC"> &nbsp;<dtml-var journal>&nbsp;</td>
+                        </tr>
+                        <tr> 
+                        <td height="30" bgcolor="#FBF6EC" nowrap>Publication Date</td>
+                        <td height="30" bgcolor="#FBF6EC"> &nbsp;<dtml-var pub_date>&nbsp;</td>
+                        </tr>
+                        <tr>
+                        <td height="30" bgcolor="#FBF6EC" nowrap>Authors - Please select the PI</td>
+                        
+                        <td height="30" bgcolor="#FBF6EC" nowrap>
+                         
+                        <dtml-call "REQUEST.set('author_str',authors.split('##'))">
+                        <dtml-in author_str>
+                            <dtml-call "REQUEST.set('au_value',_['sequence-item'])"> 
+                            <dtml-if "au_value!=''">
+                                  &nbsp;<input type="radio" name="PI" value="<dtml-var au_value>">&nbsp;<dtml-var au_value>&nbsp;<br> 
+                            </dtml-if>
+                       </dtml-in>
+                        </td>
+                        </tr>
+                       <tr>
+                            <td height="30" bgcolor="#FBF6EC" nowrap>PI in database search</td>
+                            <td height="30" bgcolor="#FBF6EC" >
+                           
+                              <dtml-call "REQUEST.set('pi_str',piInfo.split('::'))">
+                              <dtml-in pi_str>
+                               <dtml-call "REQUEST.set('pi_s',_['sequence-item'].split('##'))">
+                                      <dtml-call "REQUEST.set('nam', pi_s[0])">
+                                       <dtml-call "REQUEST.set('piEmail', pi_s[1])">
+                                       <dtml-call "REQUEST.set('piInst', pi_s[2])">
+                                        <b style="color:blue"><dtml-var nam></b><br/>
+                                        <dtml-var piEmail><br/>
+                                        <dtml-var piInst><br/>
+                              </dtml-in>
+                          </tr>
+                       <tr> 
+                        <td height="30" bgcolor="#FBF6EC" nowrap>PI Institution</td>
+                        <td height="30" bgcolor="#FBF6EC"> &nbsp;<textarea name="PI_int" row="30" cols="80"></textarea>&nbsp;</td>
+                        </tr>
+                       <tr> 
+                        <td height="30" bgcolor="#FBF6EC" nowrap>PI E-mail Id</td>
+                        <td height="30" bgcolor="#FBF6EC"> &nbsp;<input type="text" name="PI_email">&nbsp;</td>
+                        </tr>
+                        <tr> 
+                        <td height="30" bgcolor="#FBF6EC" nowrap>Human Sample Source</td>
+                        <td height="30" bgcolor="#FBF6EC"> &nbsp;<input type="text" name="sample_source">&nbsp;</td>
+                        </tr>
+                       <tr> 
+                        <td height="30" bgcolor="#FBF6EC" nowrap>Human Source Type</td>
+                        <td height="30" bgcolor="#FBF6EC"> &nbsp;<select name="source_type">
+                             <option value="">Select</option>
+                             <option>Cell Line</option>
+                             <option>Normal Tissue</option>
+                             <option>Disease Tissue</option>
+                           </select></td>
+                        </tr>
+
+                      <tr> 
+                        <td height="30" bgcolor="#FBF6EC" nowrap>Labeling technique</td>
+                        <td height="30" bgcolor="#FBF6EC"> &nbsp;<select name="label_tech">
+                             <option value="">Select</option>
+                             <option>iTRAQ</option>
+                             <option>SILAC</option>
+                             <option>018</option>
+                             <option>0ther</option>
+                             <option>ICAT</option>
+                           </select></td>
+                      </tr>
+
+                                      
+                      <tr> 
+                        <td height="30" bgcolor="#FBF6EC" nowrap>Is the sample from in gel?</td>
+                        <td height="30" bgcolor="#FBF6EC"> &nbsp;<select name="in_gel">
+                            <option value="">Select</option>
+                            <option value="Yes">Yes</option>
+                            <option value="No">No</option>
+                      </select></td>
+                      </tr>
+
+                      <tr> 
+                        <td height="30" bgcolor="#FBF6EC" nowrap>Mass spectrometer used</td>
+                        <td height="30" bgcolor="#FBF6EC"> &nbsp;<select name="ms_instrument" multiple>
+                            <option value="" selected>Select instrument</option>
+                            <option value="4000 Q TRAP">4000 Q TRAP</option>
+<option value="4700 Proteomic Analyzer">4700 Proteomic Analyzer</option>
+<option value="4000 QTRAP">4000 QTRAP</option>
+<option value="APEX IV">APEX IV</option>
+<option value="APEX-Q">APEX-Q</option>
+<option value="API 150EX">API 150EX</option>
+<option value="API 150EX Prep">API 150EX Prep</option>
+<option value="API 2000">API 2000</option>
+<option value="API 3000">API 3000</option>
+<option value="API 4000">API 4000</option>
+<option value="autoFlex II">autoFlex II</option>
+<option value="autoFlex TOF/TOF">autoFlex TOF/TOF</option>
+<option value="Auto Spec Ultima NT">Auto Spec Ultima NT</option>
+<option value="Bio TOF II">Bio TOF II</option>
+<option value="Bio TOF Q">Bio TOF Q</option>
+<option value="DELTA plusAdvantage">DELTA plusAdvantage</option>
+<option value="DELTAplusXP">DELTAplusXP</option>
+<option value="ELEMENT2">ELEMENT2</option>
+<option value="esquire4000">esquire4000</option>
+<option value="esquire6000">esquire6000</option>
+<option value="Explorer">Explorer</option>
+<option value="FTICR">FTICR</option>
+<option value="GCT">GCT</option>
+<option value="HCT">HCT</option>
+<option value="HCT Plus">HCT Plus</option>
+<option value="HiRes ESI">HiRes ESI</option>
+<option value="HiRes MALDI">HiRes MALDI</option>
+<option value="IsoPrime">IsoPrime</option>
+<option value="IsoProbe">IsoProbe</option>
+<option value="IsoProbe T">IsoProbe T</option>
+<option value="LCQ Advantage">LCQ Advantage</option>
+<option value="LCQ Classic">LCQ Classic</option>
+<option value="LCQ Deca XP Plus">LCQ Deca XP Plus</option>
+<option value="M@LDI L">M@LDI L</option>
+<option value="M@LDI LR">M@LDI LR</option>
+<option value="MALDI-FTICR">MALDI-FTICR</option>
+<option value="MALDI TOF/TOF">MALDI TOF/TOF</option>
+<option value="MAT253">MAT253</option>
+<option value="MAT900XP">MAT900XP</option>
+<option value="MAT900XP Trap">MAT900XP Trap</option>
+<option value="MAT95XP">MAT95XP</option>
+<option value="MAT95XP Trap">MAT95XP Trap</option>
+<option value="microFlex">microFlex</option>
+<option value="microTOFLC">microTOFLC</option>
+<option value="Neptune">Neptune</option>
+<option value="NG-5400">NG-5400</option>
+<option value="OMEGA">OMEGA</option>
+<option value="OMEGA-2001">OMEGA-2001</option>
+<option value="OmniFlex">OmniFlex</option>
+<option value="Platform ICP">Platform ICP</option>
+<option value="PolarisQ">PolarisQ</option>
+<option value="Proteomics Solution 1">Proteomics Solution 1</option>
+<option value="Q-FTMS">Q-FTMS</option>
+<option value="qQTOF">qQTOF</option>
+<option value="Q TRAP">Q TRAP</option>
+<option value="Q-Tof micro">Q-Tof micro</option>
+<option value="Q-Tof Ultima">Q-Tof Ultima</option>
+<option value="QSTAR">QSTAR</option>
+<option value="Quattro micro">Quattro micro</option>
+<option value="Quattro UItima">Quattro UItima</option>
+<option value="Surveyor MSQ">Surveyor MSQ</option>
+<option value="SymBiot I">SymBiot I</option>
+<option value="SymBiot XVI">SymBiot XVI</option>
+<option value="TEMPUS TOF">TEMPUS TOF</option>
+<option value="TRACE DSQ">TRACE DSQ</option>
+<option value="TRITON">TRITON</option>
+<option value="TSQ QUANTUM">TSQ QUANTUM</option>
+<option value="Ultima">Ultima</option>
+<option value="ultraFlex">ultraFlex</option>
+<option value="ultraFlex TOF/TOF">ultraFlex TOF/TOF</option>
+<option value="Voyager-DE PRO">Voyager-DE PRO</option>
+<option value="Voyager-DE STR">Voyager-DE STR</option>
+<option value="LTQ">LTQ</option>
+<option value="LTQ FT">LTQ FT</option>
+<option value="LTQ Orbitrap">LTQ Orbitrap</option>
+<option value="LXQ">LXQ</option>
+<option value="XCT ion trap">XCT ion trap</option>
+                      </select></td>
+                      </tr>
+
+
+<tr> 
+<td height="30" bgcolor="#FBF6EC" nowrap>Instrument vendor</td>
+<td height="30" bgcolor="#FBF6EC"> &nbsp;<select name="vendor" multiple>
+<option value="" selected>Select instrument vendor</option> 
+<option value="ABI/SCIEX">ABI/SCIEX</option>
+<option value="Agilent">Agilent Technologies</option>
+<option value="Bruker Daltonics">Bruker Daltonics</option>
+<option value="Ion Spec">Ion Spec</option>
+<option value="MDS SCIEX">MDS SCIEX</option>
+<option value="Shimadzu">Shimadzu</option>
+<option value="ThermoFinnigan">ThermoFinnigan</option>
+<option value="ThermoElectron">ThermoElectron</option>
+<option value="Waters">Waters</option>
+</select></td>
+                      </tr>
+
+
+ <tr> 
+<td height="30" bgcolor="#FBF6EC" nowrap>Ionization method</td>
+<td height="30" bgcolor="#FBF6EC"> &nbsp;<select name="ion_mode" multiple>
+<option value="" selected>Select an ionization type</option>    
+ <option value="Adiabatic Ionization">Adiabatic Ionization</option>
+<option value="Associative Ionization">Associative Ionization</option>
+<option value="Atmospheric Pressure Chemical Ionization (APCI)">Atmospheric Pressure Chemical Ionization (APCI)</option>
+<option value="Atmospheric Pressure Ionization (API)">Atmospheric Pressure Ionization (API)</option>
+<option value="Atmospheric Pressure Matrix-Assisted Laser Desorption Ionization (AP MALDI)">Atmospheric Pressure Matrix-Assisted Laser Desorption Ionization (AP MALDI)</option>
+<option value="Atmospheric Pressure Photoionization">Atmospheric Pressure Photoionization</option>
+<option value="Atmostpheric Pressure Photoionization (APPI)">Atmostpheric Pressure Photoionization (APPI)</option>
+<option value="Autodetachment">Autodetachment</option>
+<option value="Autoionization">Autoionization</option>
+<option value="Charge Exchange Ionization">Charge Exchange Ionization</option>
+<option value="Chemical Ionization (CI)">Chemical Ionization (CI)</option>
+<option value="Chemi-ionization">Chemi-ionization</option>
+<option value="Desorption Ionization (DI)">Desorption Ionization (DI)</option>
+<option value="Desorption/Ionization On Silicon">Desorption/Ionization On Silicon</option>
+<option value="Dissociative Ionization">Dissociative Ionization</option>
+<option value="Electronic Ionization (EI)">Electronic Ionization (EI)</option>
+<option value="Electron Ionization">Electron Ionization</option>
+<option value="Electrospray Ionization (ESI)">Electrospray Ionization (ESI)</option>
+<option value="Fast Atom Bombardment Ionization (FAB)">Fast Atom Bombardment Ionization (FAB)</option>
+<option value="Fast Ion Bombardment (FIB)">Fast Ion Bombardment (FIB)</option>
+<option value="Field Desorption (FD)">Field Desorption (FD)</option>
+<option value="Field Ionization (FI)">Field Ionization (FI)</option>
+<option value="Flowing Afterglow (FA)">Flowing Afterglow (FA)</option>
+<option value="Glow Discharge Ionization (GD-MS)">Glow Discharge Ionization (GD-MS)</option>
+<option value="Laser Desorption Ionization">Laser Desorption Ionization</option>
+<option value="Laser Desorption (LD)">Laser Desorption (LD)</option>
+<option value="Laser Ionization">Laser Ionization</option>
+<option value="Liquid Secondary Ionization">Liquid Secondary Ionization</option>
+<option value="Matrix-assisted Laser Desorption Ionization (MALDI)">Matrix-assisted Laser Desorption Ionization (MALDI)</option>
+<option value="Microelectrospray">Microelectrospray</option>
+<option value="Nanoelectrospray">Nanoelectrospray</option>
+<option value="Negative Ion Chemical Ionization (NICI)">Negative Ion Chemical Ionization (NICI)</option>
+<option value="Neutralization Reionization Mass Spectrometry (NRMS)">Neutralization Reionization Mass Spectrometry (NRMS)</option>
+<option value="Penning Ionization">Penning Ionization</option>
+<option value="Photoionization (PI)">Photoionization (PI)</option>
+<option value="Plasma Desorption Ionization">Plasma Desorption Ionization</option>
+<option value="Pyrolysis Mass Spectrometry (PyMS)">Pyrolysis Mass Spectrometry (PyMS)</option>
+<option value="Resonance Enhanced Multiphoton Ionization (REMPI)">Resonance Enhanced Multiphoton Ionization (REMPI)</option>
+<option value="Secondary Ionization">Secondary Ionization</option>
+<option value="Soft Ionization">Soft Ionization</option>
+<option value="Spark Ionization">Spark Ionization</option>
+<option value="Spark Source Mass Spectrometry (SSMS)">Spark Source Mass Spectrometry (SSMS)</option>
+<option value="Suface Ionization (SI)">Suface Ionization (SI)</option>
+<option value="Surface-Assisted Laser Desorption Ionization">Surface-Assisted Laser Desorption Ionization</option>
+<option value="Surface Enhanced Laser Desorption Ionization (SELDI)">Surface Enhanced Laser Desorption Ionization (SELDI)</option>
+<option value="Surface Enhanced Neat Desorption (SEND)">Surface Enhanced Neat Desorption (SEND)</option>
+<option value="Surface Ionization">Surface Ionization</option>
+<option value="Thermal Ionization">Thermal Ionization</option>
+<option value="Vertical Ionization">Vertical Ionization</option>             
+</select></td>
+                      </tr>
+<tr> 
+<td height="30" bgcolor="#FBF6EC" nowrap>Activation method</td>
+<td height="30" bgcolor="#FBF6EC"> &nbsp;<select name="frag_mode" multiple>
+<option value="" selected>Select activation method</option>
+<option value="Collision-Induced Dissociation (CID)">Collision-Induced Dissociation (CID)</option>
+<option value="Electron Capture Dissociation (ECD)">Electron Capture Dissociation (ECD)</option>
+<option value="Electron Transfer Dissociation (ETD)">Electron Transfer Dissociation (ETD)</option>
+<option value="Plasma Desorption (PD)">Plasma Desorption (PD)</option>
+<option value="Post-Source Decay (PSD)">Post-Source Decay (PSD)</option>
+<option value="Surface-Induced Dissociation (SID)">Surface-Induced Dissociation (SID)</option>
+<option value="Sustained Off-Resonance Irradiation (SORI)">Sustained Off-Resonance Irradiation (SORI)</option>
+</select></td>
+                      </tr>
+
+                     <tr> 
+                        <td height="30" bgcolor="#FBF6EC" nowrap>Search algorithm used</td>
+                        <td height="30" bgcolor="#FBF6EC"> &nbsp;<select name="search_engine" multiple>
+                             <option value="" selected>Select</option>
+                             <option>IDPicker</option>
+                             <option>InsPect</option>
+                             <option>Knexus</option>
+                             <option>Mascot</option>
+                             <option>MS-FIT</option>
+                             <option>MyriMatch</option>
+                             <option>msInspect</option>
+                             <option>OMSSA</option>
+                             <option>ProFound</option>
+                             <option>ProteinLynx</option>
+                             <option>ProteinPilot</option>
+                             <option>ProteinProspector</option>
+                             <option>ProQuant</option>
+                             <option>ProSight PTM</option>
+                             <option>SpectrumMill</option>
+                             <option>SEQUEST</option>
+                             <option>X!Tandem</option>                             
+                           </select></td>
+                      </tr>
+                       <tr> 
+                        <td height="30" bgcolor="#FBF6EC" nowrap>Data Count</td>
+                        <td height="30" bgcolor="#FBF6EC"> &nbsp;<select name="data_count">
+                            <option value="">Select</option>
+                             <option value="Small">Small</option>
+                             <option value="Medium">Medium</option>
+                             <option value="Big">Big</option>
+                        &nbsp;</td>
+                        </tr>
+                      <input type="hidden" name="red_alk" value="No">
+                      <dtml-comment>
+                       # This part is removed from the page, may in feature need to be included
+                       # In database I have not removed the column so as hidden text box I am passing 
+                       # value in above
+                       #
+                        <tr> 
+                        <td height="30" bgcolor="#FBF6EC" nowrap>Reduction and alkylation</td>
+                        <td height="30" bgcolor="#FBF6EC"> &nbsp;<select name="red_alk">
+                            <option value="">Select</option>
+                            <option value="Yes">Yes</option>
+                            <option value="No">No</option>
+                      </select></td>
+                      </tr>             
+                     </dtml-comment>
+                    </table>
+<br><br>
+<center><input type="submit" value="Submit"></center>
+                   
+</form>
+
+
+<dtml-var standard_html_footer>

@@ -1,0 +1,2 @@
+<dtml-call "REQUEST.set('result_string', Update_Journal(journal, pri_id, username))">
+<dtml-call expr="RESPONSE.redirect('%s?session_id=%s&username=%s' % (REQUEST['journal'], REQUEST['session_id'], REQUEST['username']))"> 

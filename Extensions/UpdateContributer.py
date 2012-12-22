@@ -1,0 +1,10 @@
+#!/usr/bin/python
+
+import MySQLdb
+def UpdateContributer(pi_name,pi_address,data_count):
+	conn = MySQLdb.connect(host="localhost", user="xxx", passwd="xxxx",db="HuPA")
+	cursor = conn.cursor()
+	piInsertSql = "insert into Contributer_info(pi_name,pi_address,data_count) values ('"+str(pi_name)+"','"+str(pi_address)+"','"+str(data_count)+"')"
+	cursor.execute(piInsertSql)
+	
+#UpdateContributer('test_name','test_pi_address','1')

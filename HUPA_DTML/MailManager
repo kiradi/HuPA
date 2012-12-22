@@ -1,0 +1,28 @@
+<dtml-var standard_html_header>
+<link href="style.css" rel="stylesheet" type="text/css">
+
+<script language="JavaScript">
+function SentMailStatus(session_id, username) { 
+  window.location="MailSentStatus?session_id="+session_id+"&username="+username;
+}
+function MailChecker(session_id, username) { 
+  window.location="MailChecker?session_id="+session_id+"&username="+username;
+}
+function MailTracker(session_id, username) { 
+  window.location="http://mailman.ibioinformatics.org/pipermail/hupa/"
+}
+</script>
+
+<table bgcolor="#0C2341" align="center" width="100%" height="300" cellspacing="1">
+<tr height="300" align="center" valign="middle" bgcolor="#f2f2f2">
+<td>
+<input type="button" style="font-family:verdana, Arial, Tahoma, Sans-Serif; font-size:9pt; font-weight:bold; color:blue; background:#e6e6fa" value="Manage mails" onclick="javascript:MailChecker('<dtml-var session_id>','<dtml-var username>');">
+</td>
+<td>
+<input type="button" style="font-family:verdana, Arial, Tahoma, Sans-Serif; font-size:9pt; font-weight:bold; color:blue; background:#e6e6fa" value="Mail track" onclick="javascript:MailTracker('<dtml-var session_id>','<dtml-var username>');">
+</td>
+</tr>
+</table>
+
+<dtml-var standard_html_footer>
+

@@ -1,0 +1,114 @@
+<dtml-var standard_html_header>
+
+<style type="text/css">
+table.coll {border-collapse: collapse}
+</style>
+<script language="JavaScript">
+
+function chkMe(msg)
+{
+   var p = confirm(msg);
+   if (p!=true)
+   {
+    document.getElementById("pi_reply").checked=false;
+    }
+}
+
+</script>
+<br/>
+<table class="coll" border="1">
+<tr height="35" align="center" valign="top" class="bluhead" bgcolor="#cc9999">
+   <td nowrap>S.No</td><td nowrap>PI name</td><td nowrap>No. of data requested</td><td nowrap>Invitation sent</td><td nowrap>PI replied</td><td nowrap>Comment</td><td nowrap>Akhilesh replied</td><td nowrap>Comment</td><td nowrap>Format details sent</td><td nowrap>PI replied</td><td nowrap>Comment</td><td nowrap>Data received</td>
+<td nowrap>Submit</td></tr>
+<dtml-call "REQUEST.set('ms_result',Fetch_MailManager())">
+<dtml-call "REQUEST.set('ms_res',ms_result.split('$$'))">
+<dtml-in ms_res>
+ <form action="MailCheckerDataUpload" method="post" enctype="multipart/form-data" name="mail<dtml-var expr=_['sequence-index']+1>">
+ <dtml-if sequence-even>
+  <tr class="mot_font" height="30" bgcolor="#EDEDF5" align="center" onmouseover="javascript:style.backgroundColor='#ffefd5'" onmouseout="javascript:style.backgroundColor='#EDEDF5'">
+ <dtml-else>
+ <tr class="mot_font" height="30" bgcolor="#f7f7f7" align="center" onmouseover="javascript:style.backgroundColor='#ffefd5'" onmouseout="javascript:style.backgroundColor='#f7f7f7'">
+ </dtml-if>
+      <dtml-call "REQUEST.set('ms_re',_['sequence-item'].split('#'))">
+      <dtml-call "REQUEST.set('s_no',ms_re[0])">
+      <dtml-call "REQUEST.set('pi_nam',ms_re[1])">
+      <dtml-call "REQUEST.set('pi_emil',ms_re[2])">
+      <dtml-call "REQUEST.set('pubids',ms_re[3].split(','))">
+      <dtml-call "REQUEST.set('inv_snt',ms_re[4])">
+      <dtml-call "REQUEST.set('pi_rep',ms_re[5])">
+      <dtml-call "REQUEST.set('pi_comnt',ms_re[6])">
+      <dtml-call "REQUEST.set('ap_rep',ms_re[7])">
+      <dtml-call "REQUEST.set('ap_comnt',ms_re[8])">
+      <dtml-call "REQUEST.set('data_req_snt',ms_re[9])">
+      <dtml-call "REQUEST.set('data_req_pi_rep',ms_re[10])">
+      <dtml-call "REQUEST.set('data_req_pi_rep_comnt',ms_re[11])">
+      <dtml-call "REQUEST.set('data_rec',ms_re[12])">
+       <td align="center"><input type="hidden" name="s_no" value="<dtml-var s_no>"><dtml-var s_no></td>
+      <td align="center"><span title="<dtml-var pi_emil>" style="cursor: help; border-bottom: 1px "><dtml-var pi_nam></span></td>
+      <td align="center">
+          <span title="<dtml-in pubids><dtml-var sequence-item>,</dtml-in>" style="cursor: help; border-bottom: 1px"><dtml-var expr="_.len(pubids)"></span>
+      </td>
+
+      <td><dtml-var inv_snt></td>
+      <dtml-if "pi_rep=='None'">
+             <td><input type="checkbox" id="pi_reply" name="pi_reply" onClick="javascript: if (this.checked) { chkMe('Are you sure that following PI replied Today?');}"/></td>
+       <dtml-else>
+            <td><span><dtml-var pi_rep></td>
+      </dtml-if>
+
+      <dtml-if "pi_comnt!='None'">
+          <td><dtml-var pi_comnt></td>
+       <dtml-else>
+            <td><input type="text" name="pi_commnt"/></td>
+       </dtml-if>
+
+       <!-- Akhilesh Reply -->
+       <dtml-if "ap_rep=='None'">
+             <td><input type="checkbox" id="ap_reply" name="ap_reply" onClick="javascript: if (this.checked) { chkMe('Are you sure that Akhilesh replied Today?'); }"/></td>
+       <dtml-else>
+            <td><dtml-var ap_rep></td>
+      </dtml-if>
+
+      <!-- Note regarding AP reply -->
+       <dtml-if "ap_comnt!='None'">
+          <td><dtml-var ap_comnt></td>
+       <dtml-else>
+            <td><input type="text" name="ap_commnt"/></td>
+       </dtml-if>
+       <!-- Data reuest mail -->
+      
+      <!-- Data request sent -->
+      <dtml-if "data_req_snt=='None'">
+             <td><input type="checkbox" name="data_req_snt" id="data_req_snt" /></td>
+       <dtml-else>
+            <td><dtml-var data_req_snt></td>
+      </dtml-if>
+
+       <!--PI reply for Data Request  -->
+      <dtml-if "data_req_pi_rep=='None'">
+             <td><input type="checkbox" id="data_req_pi_reply" name="data_req_pi_reply"/></td>
+       <dtml-else>
+            <td><dtml-var data_req_pi_rep></td>
+      </dtml-if>
+
+      <!--Note regarding PI reply -->
+      <dtml-if "data_req_pi_rep_comnt!='None'">
+          <td><dtml-var data_req_pi_rep_comnt></td>
+       <dtml-else>
+            <td><input type="text" name="data_req_pi_rep_commnt"/></td>
+       </dtml-if>
+
+      <!-- Data received -->
+      <dtml-if "data_rec=='None'">
+             <td><input type="checkbox" name="data_received"/></td>
+       <dtml-else>
+            <td><dtml-var data_rec></td>
+      </dtml-if>
+
+      <!--Update -->
+      <td><input type="submit" value="Submit" name="submit"/></td>
+</tr>
+</form>
+</dtml-in>
+<tr><td>
+<dtml-var standard_html_footer></td></tr></table>

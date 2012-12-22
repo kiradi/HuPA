@@ -1,0 +1,114 @@
+<dtml-var standard_html_header>
+<style type="text/css">
+ td{
+     	font-size: .8em;
+	font-family:sans-serif;
+        color:#0000FF;
+   }
+</style>
+<script type="text/javascript">
+function MailSender(pmid,username,session_id)
+  {
+      window.location="Mail_Sender?pmid="+pmid+"&username="+username+"&session_id="+session_id;
+  }
+
+</script>
+<br />
+<form action="Mail_Sender" method="post" enctype="multipart/form-data" name="newPiEmailForm">
+<dtml-call "REQUEST.set('e_result', Fetch_Email_Info(pmid))">
+<dtml-call "REQUEST.set('en_result', Fetch_Email_Info(pmid))">
+<dtml-call "REQUEST.set('en_res',en_result.split('@@@'))">
+<dtml-call "REQUEST.set('pi',en_res[0])">
+<dtml-call "REQUEST.set('drPi',en_res[1])">
+<dtml-call "REQUEST.set('piEmailId',en_res[2])">
+<dtml-call "REQUEST.set('citationList',en_res[3])">
+<dtml-var pi>
+<dtml-var piEmailId>
+<dtml-call "REQUEST.set('citation',citationList.split('$$'))">
+
+<dtml-comment>
+<dtml-call "REQUEST.set('e_res',e_result.split('#'))">
+<dtml-call "REQUEST.set('fAuthor',e_res[0])">
+<dtml-call "REQUEST.set('pubtitle',e_res[1])">
+<dtml-call "REQUEST.set('journal',e_res[2])">
+<dtml-call "REQUEST.set('pub_date',e_res[3])">
+<dtml-call "REQUEST.set('pi',e_res[4])">
+
+<!--dtml-call "REQUEST.set('pi_email',e_res[5])"-->
+<dtml-call "REQUEST.set('pmid',e_res[6])">
+<dtml-call "REQUEST.set('drPi',e_res[7])">
+</dtml-comment>
+<table border="0">
+<tr>
+ <td>From:</td>
+ <td>
+    <select name="fromid">
+     <option value='Prashantha Hebbar Kiradi prashantha@ibioinformatics.org' name='formid'>Prashantha Hebbar Kiradi</option>
+     <option value='Akhilesh Pandey pandey@jhmi.edu' name='formid'>Akhilesh Pandey</option>
+    </select>
+ </td>
+</tr>
+
+<tr>
+ <td>To:</td>
+ <td><input type="text" value="<dtml-var piemailid missing="prashantha@ibioinformatics.org">" name="piemailid" size="80" /></td>
+</tr>
+
+<tr>
+ <td>CC:</td>
+ <td><input type="text" value='Prashantha Hebbar Kiradi prashantha@ibioinformatics.org,Suresh suresh@jhmi.edu,Nandini nandini@ibioinformatics.org,Human Proteinpedia hupalist@ibioinformatics.org' name="ccid" size="80" /></td>
+</tr>
+
+<tr>
+ <td>BCC:</td>
+ <td><input type="text" value='Akhilesh Pandey pandey@jhmi.edu' name="bccid" size="80" /></td>
+</tr>
+
+<tr>
+ <td>Subject:</td>
+ <td><input type="text" value="Invitation to participate in Human Proteinpedia" name="subject" size="80" /></td>
+</tr>
+
+<tr>
+ <td></td>
+ <td><input type="hidden" value='Akhilesh Pandey pandey@jhmi.edu,Prashantha Hebbar Kiradi prashantha@ibioinformatics.org,Human Proteinpedia hupalist@ibioinformatics.org' name="replyto" size="80" /></td>
+</tr>
+
+<tr>
+ <td></td>
+ <td>
+ <textarea name="body" rows="10" cols="80">
+Dear Dr. <dtml-var drPi>,
+
+Thank you again for providing data to the public repository  'Human Proteinpedia'  in the past.  I am writing to you this time to see if you would be willing to provide data from the following manuscript(s) for inclusion into Human Proteinpedia:
+<dtml-in citation>
+     <dtml-call "REQUEST.set('citeSp',_['sequence-item'].split('#'))"><dtml-call "REQUEST.set('fAuthor',citeSp[0].split(',')[0])"><dtml-call "REQUEST.set('arTitle',citeSp[1])"><dtml-call "REQUEST.set('jTitle',citeSp[2])"><dtml-call "REQUEST.set('pubDate',citeSp[3])">
+     <dtml-var sequence-number>. <dtml-var fAuthor> et.al.,&nbsp;<dtml-var arTitle>,&nbsp;<dtml-var jTitle>,&nbsp;<dtml-var pubDate>
+</dtml-in>
+<dtml-comment>
+<dtml-var fAuthor> et.al,<dtml-var pubtitle>,<dtml-var journal>,<dtml-var pub_date>;
+</dtml-comment>
+The credit for each entry will be clearly linked to your laboratory and we hope that your work will receive increased citations for your contributions.
+
+As in the past, we are prepared to work closely with you to make submission of your data as painless as possible. If you provide me with a contact person in your group, our proteomics data processing team will work directly with them and provide additional details regarding the correct format etc. I sincerely hope that you will consider contributing additional data to this project.  
+
+Thanking you in anticipation,
+
+Akhilesh Pandey, M.D., Ph.D.
+Associate Professor
+McKusick-Nathans Institute of Genetic Medicine
+Johns Hopkins University
+Baltimore, MD 21205
+
+Phone: 410-502-6662
+Fax: 410-502-7544
+E-mail: pandey@jhmi.edu 
+Pandey Lab Homepage: http://pandeylab.igm.jhmi.edu 
+  </textarea>
+ </td>
+</tr>
+
+<th colspan="2"><input type="submit" value="Submit" onClick=MailSender('<dtml-var pmid>','<dtml-var username>','<dtml-var session_id>')></th>
+</table>
+</form>
+<dtml-var standard_html_footer>

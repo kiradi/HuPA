@@ -1,0 +1,69 @@
+#!/usr/bin/python
+
+import MySQLdb
+import time
+
+def Del_PMID(pmid, comments, status, username):
+	present_time=time.localtime()
+        ###print present_time
+        year=present_time[0]
+        date=present_time[2]
+        month=present_time[1]
+        hour=present_time[3]
+        minute=present_time[4]
+        seconds=present_time[5]
+        final_date=str(month)+"/"+str(date)+"/"+str(year)
+        final_time=final_date+" "+str(hour)+":"+str(minute)+":"+str(seconds)
+
+	if status=='Indexed':
+		res_str=Indexed_PMID(pmid, comments, username, final_time)
+	if status=='Annotated':
+		res_str=Annotated_PMID(pmid, comments, username, final_time, 'AP')
+	if status=='Annotated_del':
+		res_str=Annotated_PMID(pmid, comments, username, final_time, 'OT')
+	return res_str
+
+
+
+def Indexed_PMID(pmid, comments, username, final_time):	
+	
+	conn = MySQLdb.connect(host="xxx.xxx.x.xxx", user="xxx", passwd="xxxx",db="HuPA")
+        cursor = conn.cursor()
+	
+	#PubMed Indexed
+	q="update PubMed_Index set status='Deleted' where pubmed="+str(pmid)
+	cursor.execute(q)
+	q="insert into  Entry_Log values (0, '"+str(pmid)+"', '"+str(username)+"', '"+str(final_time)+"',  'Indexed_Del', 'Deleted')"
+        cursor.execute(q)
+	q="insert into Indexed_Del values (0, '"+str(pmid)+"', '"+str(comments)+"')"
+	cursor.execute(q)
+
+
+	conn.commit()
+	cursor.close()
+        conn.close()
+
+	return "done"
+
+def Annotated_PMID(pmid, comments, username, final_time, st):
+
+        conn = MySQLdb.connect(host="xxx.xxx.x.xxx", user="xxx", passwd="xxxx",db="HuPA")
+        cursor = conn.cursor()
+
+        #PubMed Annotated
+        q="update PubMed_Index set status='Deleted' where pubmed="+str(pmid)
+        cursor.execute(q)
+	if st=='AP':
+	        q="insert into  Entry_Log values (0, '"+str(pmid)+"', '"+str(username)+"', '"+str(final_time)+"',  'Annotated_Del', 'Disapproved')"
+	else:
+		q="insert into  Entry_Log values (0, '"+str(pmid)+"', '"+str(username)+"', '"+str(final_time)+"',  'Annotated_Del', 'Deleted')"
+        cursor.execute(q)
+        q="insert into Indexed_Del values (0, '"+str(pmid)+"', '"+str(comments)+"')"
+        cursor.execute(q)
+	q="update PubMed_Anno set status='Disapproved' where pubmed="+str(pmid)
+	cursor.execute(q)
+
+        conn.commit()
+        cursor.close()
+        conn.close()
+        return "done"

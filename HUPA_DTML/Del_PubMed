@@ -1,0 +1,9 @@
+<dtml-var standard_html_header>
+<dtml-call "REQUEST.set('result_string', Del_PMID(pmid, comments, status, username))">
+<dtml-if "status=='Indexed'">
+<dtml-call expr="RESPONSE.redirect('Indexed_PMID?session_id=%s&username=%s' % (REQUEST['session_id'], REQUEST['username']))"> 
+</dtml-if>
+<dtml-if "status=='Annotated'">
+<dtml-call expr="RESPONSE.redirect('Annotated_PMID?app=1&session_id=%s&username=%s' % (REQUEST['session_id'], REQUEST['username']))"> 
+</dtml-if>
+<dtml-var standard_html_footer>

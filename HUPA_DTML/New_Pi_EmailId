@@ -1,0 +1,110 @@
+<dtml-var standard_html_header>
+<style type="text/css">
+ td{
+     	font-size: .8em;
+	font-family:sans-serif;
+        color:#0000FF;
+   }
+</style>
+<script type="text/javascript">
+function MailSender(pmid,username,session_id)
+  {
+     window.location="Mail_Sender?pmid="+pmid+"&username="+username+"&session_id="+session_id;
+  }
+
+</script>
+
+<form action="Mail_Sender" method="post" enctype="multipart/form-data" name="newPiEmailForm">
+<dtml-call "REQUEST.set('en_result', Fetch_Email_Info(pmid))">
+<dtml-call "REQUEST.set('en_res',en_result.split('@@@'))">
+<dtml-call "REQUEST.set('pi',en_res[0])">
+<dtml-call "REQUEST.set('drPi',en_res[1])">
+<dtml-call "REQUEST.set('piEmailId',en_res[2])">
+<dtml-call "REQUEST.set('citationList',en_res[3])">
+<dtml-call "REQUEST.set('pmids',en_res[4])">
+<dtml-call "REQUEST.set('citation',citationList.split('$$'))">
+<table border="0">
+<tr>
+ <td>From:</td>
+ <td>
+    <select name="fromid">
+     <option value="prashantha">Prashantha Hebbar Kiradi</option>
+     <option value="pandey" selected>Akhilesh Pandey</option>
+    </select>
+ </td>
+</tr>
+<tr>
+ <td>To:</td>
+ <td><input type="text" value="<dtml-var piEmailId>" name="piEmailId" size="80" /></td>
+</tr>
+<tr>
+ <td>CC:</td>
+ <td><input type="text" value="'Prashantha Hebbar Kiradi' <prashantha@ibioinformatics.org>,'Suresh' <suresh@ibioinformatics.org>,'Nandini' <nandini@ibioinformatics.org>,'Human Proteinpedia' <hupa@ibioinformatics.org>" name="ccid" size="80" /></td>
+</tr>
+<tr>
+ <td>BCC:</td>
+ <td><input type="text" value="'Akhilesh Pandey' <pandey@jhmi.edu>" name="bccid" size="80" /></td>
+</tr>
+
+<tr>
+ <td></td>
+ <td><input type="hidden" value="'Akhilesh Pandey' <pandey@jhmi.edu>,'Prashantha Hebbar Kiradi' <prashantha@ibioinformatics.org>,'Nandini' <nandini@ibioinformatics.org>,'Human Proteinpedia' <hupa@ibioinformatics.org>" name="replyto" size="80" /></td>
+</tr>
+
+<tr>
+ <td>Subject:</td>
+ <td><input type="text" value="<dtml-var subject missing="Invitation to participate in Human Proteinpedia">" name="subject" size="80" /></td>
+</tr>
+
+<tr>
+<td>Attachment:</td>
+<td>
+<input type="file" name="attach" size="80%">
+</td>
+</tr>
+
+<tr>
+ <td></td>
+ <td>
+  <textarea name="body" rows="10" cols="80">
+Dear Dr. <dtml-var drPi>,
+
+We have developed a unique resource called Human Proteinpedia that allows investigators to contribute their data on human proteins and share it with the biomedical community.  All of the contributed data can be visualized in the context of individual proteins through Human Protein Reference Database, a database that we have previously developed that is currently accessed by >50,000 users per month (700,000 page views/month).  We have already received an enthusiastic response from the biomedical community in contributing data and hope that your laboratory can also participate in this initiative.  I am attaching a manuscript describing Human Proteinpedia that was recently published in Nature Biotechnology. With Human Proteinpedia, you can share data pertaining to post-translational modifications, protein-protein interactions, subcellular localization, tissue expression data, cell line expression data and kinase substrates. We believe that this resource will ultimately become an authoritative resource on the web for all human proteins.  The credit for each entry will be clearly linked to your laboratory and we hope that your work will receive increased citations for your contributions.
+
+You can submit most types of data relating to human proteins: e.g. mass spectrometry-based identifications of proteins/peptides (MS/MS data only), PTMs, W. blots, immunohistochemistry etc.  It would be great if you could provide the data from the following manuscript(s) to be incorporated into Human Proteinpedia:
+<dtml-in citation>
+     <dtml-call "REQUEST.set('citeSp',_['sequence-item'].split('#'))"><dtml-call "REQUEST.set('fAuthor',citeSp[0].split(',')[0])"><dtml-call "REQUEST.set('arTitle',citeSp[1])"><dtml-call "REQUEST.set('jTitle',citeSp[2])"><dtml-call "REQUEST.set('pubDate',citeSp[3])">
+     <dtml-var sequence-number>. <dtml-var fAuthor> et.al.,&nbsp;<dtml-var arTitle>,&nbsp;<dtml-var jTitle>,&nbsp;<dtml-var pubDate>
+</dtml-in>
+
+
+We are prepared to work closely with you to make submission of your data as painless as possible. If you provide me with a contact person in your group, our proteomics data processing team will work directly with them and provide additional details regarding the correct format etc. I sincerely hope that you will consider participating in this project.
+
+URLs:
+
+Human Protein Reference Database: http://www.hprd.org
+Human Proteinpedia: http://www.humanproteinpedia.org
+Human Proteinpedia Registration Page: http://pdas.hprd.org/register
+
+Thank you and looking forward to hearing from you.
+
+Akhilesh Pandey, M.D., Ph.D.
+Associate Professor
+McKusick-Nathans Institute of Genetic Medicine
+Johns Hopkins University
+Baltimore, MD 21205
+
+Phone: 410-502-6662
+Fax: 410-502-7544
+E-mail: pandey@jhmi.edu 
+Pandey Lab Homepage: http://pandeylab.igm.jhmi.edu  
+  </textarea>
+ </td>
+</tr>
+<th colspan="2"><input type="submit" value="Submit" onClick=MailSender('<dtml-var pmid>','<dtml-var username>','<dtml-var session_id>')></th>
+</table>
+<input type='hidden' name="pmids" value="<dtml-var pmids>">
+<input type='hidden' name="piName" value="<dtml-var pi>">
+<input type='hidden' name="username" value="<dtml-var username>">
+</form>
+<dtml-var standard_html_footer>

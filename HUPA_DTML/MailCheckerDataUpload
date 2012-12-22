@@ -1,0 +1,64 @@
+<dtml-var standard_html_header>
+
+<dtml-comment>
+##################### 
+#
+# Start of Checking form variables   
+#
+#####################
+</dtml-comment>
+
+<dtml-if "REQUEST.has_key('pi_reply')">
+<dtml-else>
+<dtml-call "REQUEST.set('pi_reply', 'off')">
+</dtml-if>
+
+
+<dtml-if "REQUEST.has_key('pi_commnt')">
+<dtml-else>
+<dtml-call "REQUEST.set('pi_commnt', 'off')">
+</dtml-if>
+
+<dtml-if "REQUEST.has_key('ap_reply')">
+<dtml-else>
+<dtml-call "REQUEST.set('ap_reply', 'off')">
+</dtml-if>
+
+<dtml-if "REQUEST.has_key('ap_commnt')">
+<dtml-else>
+<dtml-call "REQUEST.set('ap_commnt', 'off')">
+</dtml-if>
+
+<dtml-if "REQUEST.has_key('data_req_snt')">
+<dtml-else>
+<dtml-call "REQUEST.set('data_req_snt', 'off')">
+</dtml-if>
+
+<dtml-if "REQUEST.has_key('data_req_pi_reply')">
+<dtml-else>
+<dtml-call "REQUEST.set('data_req_pi_reply', 'off')">
+</dtml-if>
+
+<dtml-if "REQUEST.has_key('data_req_pi_rep_commnt')">
+<dtml-else>
+<dtml-call "REQUEST.set('data_req_pi_rep_commnt', 'off')">
+</dtml-if>
+
+<dtml-if "REQUEST.has_key('data_received')">
+<dtml-else>
+<dtml-call "REQUEST.set('data_received', 'off')">
+</dtml-if>
+
+
+<dtml-comment>
+##################### 
+#
+# End of Checking form variables   
+#
+#####################
+</dtml-comment>
+
+<dtml-call "REQUEST.set('upMailResult', Update_MailManager(s_no,pi_reply,pi_commnt,ap_reply,ap_commnt,data_req_snt,data_req_pi_reply,data_req_pi_rep_commnt,data_received))">
+<dtml-comment><dtml-call expr="RESPONSE.redirect('MailChecker?session_id=%s&username=%s' % (REQUEST['session_id'], REQUEST['username']))"> </dtml-comment>
+<dtml-var upMailResult>
+<dtml-var standard_html_footer>

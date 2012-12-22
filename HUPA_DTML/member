@@ -1,0 +1,18 @@
+<dtml-var standard_html_header>
+
+<META HTTP-EQUIV="refresh" CONTENT="30;URL=http://192.168.5.122:8080/PROJECTS/HuPA">
+<dtml-call "REQUEST.set('title_string', hupa_registration(fName, lName, username, password))">
+<table><tr>
+
+<dtml-if "title_string=='exists'">
+<td width=30%>&nbsp;&nbsp;</td><td>Sorry ! The username <span class="user"><dtml-var username></span> already exists. </td>
+<dtml-else>
+<td width=30%>&nbsp;</td><td>Thank you very much for your time <span class="red">Mr/Ms <dtml-var fName>&nbsp;<dtml-var lName></span>. </td>
+</tr><tr><br><td width=30%>&nbsp;</td><td>You will be redirected to the login page within 20 seconds. If you are not redirected <a href="http://192.168.5.122:8080/PROJECTS/HuPA" class="blusml">click here</a>.</td>
+</dtml-if>
+
+</tr></table>
+<table height="300">
+<tr><td>&nbsp;</td></tr>
+</table>
+<dtml-var standard_html_footer>
