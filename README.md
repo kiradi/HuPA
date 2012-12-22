@@ -2,5 +2,5 @@ HUPA_DTML: has DTML page templetes develped for automated data request pipeline 
 
 Extensions: has python scripts for the same.
 
-DataUpdater: has OOP python scripts for automated data uploading pipeline to Human proteinpedia
+DataUpdater: has OOP python scripts of automated data update pipeline developed for Human proteinpedia
 
